@@ -8,8 +8,9 @@ describe("Shopping Cart - Step 1", () => {
 
     cart.addProduct(doveSoap, 5);
 
-    expect(cart.getItems().length).toBe(1);
-    expect(cart.getItems()[0].quantity).toBe(5);
+    const items = cart.getItems();
+    expect(items.length).toBe(1);
+    expect(items[0]!.quantity).toBe(5);
     expect(cart.getTotalPrice()).toBe(199.95);
   });
 });
