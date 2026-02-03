@@ -1,5 +1,6 @@
 import { Product } from "./Product";
 import { CartItem } from "./CartItem";
+import { roundToTwoDecimals } from "../utils";
 
 export class ShoppingCart {
   private readonly items: CartItem[] = [];
@@ -15,6 +16,6 @@ export class ShoppingCart {
   getTotalPrice(): number {
     const total = this.items.reduce((sum, item) => sum + item.getSubtotal(), 0);
 
-    return Number(total.toFixed(2));
+    return roundToTwoDecimals(total);
   }
 }
