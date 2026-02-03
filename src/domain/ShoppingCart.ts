@@ -6,7 +6,15 @@ export class ShoppingCart {
   private readonly items: CartItem[] = [];
 
   addProduct(product: Product, quantity: number): void {
-    this.items.push(new CartItem(product, quantity));
+    const existingItem = this.items.find(
+      (item) => item.product.name === product.name
+    );
+
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      this.items.push(new CartItem(product, quantity));
+    }
   }
 
   getItems(): CartItem[] {
