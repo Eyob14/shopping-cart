@@ -11,6 +11,7 @@ describe("Shopping Cart - Step 1", () => {
     const items = cart.getItems();
     expect(items.length).toBe(1);
     expect(items[0]!.quantity).toBe(5);
+    expect(items[0]!.product.unitPrice).toBe(39.99);
     expect(cart.getTotalPrice()).toBe(199.95);
   });
 });
@@ -40,7 +41,21 @@ describe("Shopping Cart - Step 3", () => {
     cart.addProduct(doveSoap, 2);
     cart.addProduct(axeDeo, 2);
 
-    expect(cart.getSalesTax()).toBe(35.0);
+    const items = cart.getItems();
+    expect(items.length).toBe(2);
+    
+    const doveItem = items.find((item) => item.product.name === "Dove Soap");
+    const axeItem = items.find((item) => item.product.name === "Axe Deo");
+    
+    expect(doveItem).toBeDefined();
+    expect(doveItem!.quantity).toBe(2);
+    expect(doveItem!.product.unitPrice).toBe(39.99);
+    
+    expect(axeItem).toBeDefined();
+    expect(axeItem!.quantity).toBe(2);
+    expect(axeItem!.product.unitPrice).toBe(99.99);
+    
+    expect(cart.getSalesTax()).toBe(35);
     expect(cart.getTotalPrice()).toBe(314.96);
   });
 });
